@@ -1,0 +1,19 @@
+<h3 style="margin:10px">Clientes</h3>
+<table class="table table-info">
+  <thead>
+    <tr>
+      <th scope="col">DNI</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Direccion</th>
+      <th scope="col"><button class="btn btn-info" [routerLink]="'/nuevocliente'">NUEVO</button></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cl of servicioCliente.clientes | async ">
+      <th scope="row">{{cl.dni}}</th>
+      <td>{{cl.nombre}}</td>
+      <td>{{cl.direccion}}</td>
+      <td><button class="btn btn-success" (click)="mostrarInfo(cl.id)">EDITAR</button></td>
+    </tr>
+  </tbody>
+</table>

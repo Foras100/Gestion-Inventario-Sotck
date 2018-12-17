@@ -1,0 +1,204 @@
+<div style="margin:10px">
+    <h3>Informacion de la Factura </h3>
+    <form style="width: 50% margin=15px" name="formul">
+  
+      <form>
+        <div class="row">
+          <div class="col-md-4">
+              <br>
+              <h5>Codigo Factura: {{factura.nro_sucursal}}-{{factura.nro_correlativo}}</h5><br>
+              <h5>Fecha: {{factura.fecha | date:'dd/MM/yyyy'}}</h5><br>
+              <h5>Tipo Factura: "{{factura.tipo}}"</h5><br>
+              <h5>Cliete: {{cliente.nombre}}</h5><br>
+              <div style="margin-left:10px" class="form-group">
+                <button class="btn btn-success" style="margin:5px" [routerLink]="'/listaventas'">Volver a la Lista de Facturas de Venta</button>
+              </div>
+          </div>
+  
+          <div class="col-md-8">
+              <h5>Items de la Factura </h5>
+              <br/>
+              <div *ngIf="factura.tipo=='A'">
+                  <table class="table table-sm table-info">
+                      <thead>
+                        <tr>
+                          <th scope="col">Cantidad</th>
+                          <th scope="col">Codigo</th>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Precio Unitario</th>
+                          <th scope="col">IVA</th>
+                          <th scope="col">Subtotal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of articulosFactura">
+                          <th scope="row">{{item.cantidad}}</th>
+                          <td>{{item.codigo_articulo}}</td>
+                          <td>{{item.nombre_articulo}}</td>
+                          <td>$ {{item.precio_venta | number:'1.2-2'}}</td>
+                          <td>{{item.iva*100}}%</td>
+                          <td>$ {{item.subtotal | number:'1.2-2'}}</td>
+                          <td><button [routerLink]="'/infoarticulo/'+item.id_articulo">INFO</button></td>
+                        </tr>
+                        <tr>
+                          <th scope="col">Total SIN IVA: </th>
+                          <th scope="col">$ {{acumuladorTotal | number:'1.2-2'}}</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  <table class="table table-sm table-danger">
+                    <thead>
+                      <tr>
+                        <th scope="col">IVA 21</th>
+                        <th scope="col">IVA 10,5</th>
+                        <th scope="col">Subtotal IVA</th>
+                        <th scope="col">Total General</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <td>$ {{acumuladorIva21 | number:'1.2-2'}}</td>
+                      <td>$ {{acumuladorIva105| number:'1.2-2'}}</td>
+                      <td>$ {{acumuladorIva21+acumuladorIva105 | number:'1.2-2'}}</td>
+                      <td>$ {{acumuladorTotal+(acumuladorIva21+acumuladorIva105) | number:'1.2-2'}}</td>
+                    </tbody>
+                  </table>
+                </div>
+              
+                <!-- Lista de Items para Facturas Tipo B o C -->
+                <div *ngIf="factura.tipo!='A'">
+                    <table class="table table-sm table-info">
+                        <thead>
+                          <tr>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Precio Unitario</th>
+                            <th scope="col">IVA</th>
+                            <th scope="col">Subtotal</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of articulosFactura">
+                            <th scope="row">{{item.cantidad}}</th>
+                            <td>{{item.codigo_articulo}}</td>
+                            <td>{{item.nombre_articulo}}</td>
+                            <td>$ {{item.precio_venta | number:'1.2-2'}}</td>
+                            <td>{{item.iva*100}}%</td>
+                            <td>$ {{item.subtotal+(item.iva*item.subtotal) | number:'1.2-2'}}</td>
+                          </tr>
+                          <tr>
+                            <th scope="col">Total: </th>
+                            <th scope="col">$ {{acumuladorTotal+(acumuladorIva21+acumuladorIva105) | number:'1.2-2'}}</th>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+  
+  
+          </div>
+        </div>
+      </form>
+      <!-- <form style="margin:10px">
+        <div class="row">
+          <div class="col">
+            <h4>Codigo de Factura: {{factura.nro_sucursal}}-{{factura.nro_correlativo}}</h4>
+          </div>
+          <div class="col">
+            <h4>Fecha: {{factura.fecha | date:'dd/MM/yyyy'}}</h4>
+          </div>
+          <div>
+            <h4>Tipo Factura: "{{factura.tipo}}"</h4>
+          </div>
+        </div>
+        <br/>
+        <form>
+          <div class="row">
+            <div class="col">
+              <h4>Proveedor: {{proveedor.nombre}}</h4>
+            </div>
+          </div>
+        </form>
+        <br/>
+  
+      </form> -->
+  
+      
+  
+      <!-- Lista de Items para Facturas Tipo A
+      <div *ngIf="factura.tipo=='A'">
+      <table class="table table-sm table-info">
+          <thead>
+            <tr>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Codigo</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Precio Unitario</th>
+              <th scope="col">IVA</th>
+              <th scope="col">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of articulosFactura">
+              <th scope="row">{{item.cantidad}}</th>
+              <td>{{item.codigo_articulo}}</td>
+              <td>{{item.nombre_articulo}}</td>
+              <td>$ {{item.precio_compra | number:'1.2-2'}}</td>
+              <td>{{item.iva*100}}%</td>
+              <td>$ {{item.subtotal | number:'1.2-2'}}</td>
+            </tr>
+            <tr>
+              <th scope="col">Total SIN IVA: </th>
+              <th scope="col">$ {{acumuladorTotal | number:'1.2-2'}}</th>
+            </tr>
+          </tbody>
+        </table>
+      <table class="table table-sm table-danger">
+        <thead>
+          <tr>
+            <th scope="col">IVA 21</th>
+            <th scope="col">IVA 10,5</th>
+            <th scope="col">Subtotal IVA</th>
+            <th scope="col">Total General</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td>$ {{acumuladorIva21 | number:'1.2-2'}}</td>
+          <td>$ {{acumuladorIva105| number:'1.2-2'}}</td>
+          <td>$ {{acumuladorIva21+acumuladorIva105 | number:'1.2-2'}}</td>
+          <td>$ {{acumuladorTotal+(acumuladorIva21+acumuladorIva105) | number:'1.2-2'}}</td>
+        </tbody>
+      </table>
+    </div>
+  
+    Lista de Items para Facturas Tipo B o C
+    <div *ngIf="factura.tipo!='A'">
+        <table class="table table-sm table-info">
+            <thead>
+              <tr>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio Unitario</th>
+                <th scope="col">IVA</th>
+                <th scope="col">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of articulosFactura">
+                <th scope="row">{{item.cantidad}}</th>
+                <td>{{item.codigo_articulo}}</td>
+                <td>{{item.nombre_articulo}}</td>
+                <td>$ {{item.precio_compra | number:'1.2-2'}}</td>
+                <td>{{item.iva*100}}%</td>
+                <td>$ {{item.subtotal+(item.iva*item.subtotal) | number:'1.2-2'}}</td>
+              </tr>
+              <tr>
+                <th scope="col">Total: </th>
+                <th scope="col">$ {{acumuladorTotal+(acumuladorIva21+acumuladorIva105) | number:'1.2-2'}}</th>
+              </tr>
+            </tbody>
+        </table>
+    </div> -->
+  
+    </form>
+  </div>

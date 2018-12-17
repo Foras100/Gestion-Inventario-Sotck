@@ -1,0 +1,149 @@
+<div style="margin:10px">
+  <h3 style="margin:10px">Nueva Factura de Compra</h3>
+  <h5>Informacion de la Factura </h5>
+  <form style="width: 50% margin=15px" name="formul">
+    
+    <form>
+      <div class="row">
+        <div class="col">
+          <label>Numero de Sucursal</label>
+          <input type="number" class="form-control" name='sucursal' [(ngModel)]="factura.nro_sucursal">
+        </div>
+        <div class="col">
+          <label>Numero Correlativo</label>
+          <input type="number" class="form-control" name='correlativo' [(ngModel)]="factura.nro_correlativo">
+        </div>
+        <div class="col">
+            <label for="exampleFormControlSelect1">Tipo</label>
+            <select class="custom-select" name="tipo" [(ngModel)]="factura.tipo" id="">
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+            </select>
+          </div>
+      </div>
+      <br/>
+      <form>
+        <div class="row">
+          <div class="col">
+            <label for="exampleFormControlInput1">Fecha</label>
+            <input type="date" class="form-control" name='fecha' [(ngModel)]="factura.fecha">
+          </div>
+          <div class="col">
+              <label for="exampleFormControlInput1">Proveedor</label>
+              <select class="custom-select" (click)='cargarArticulos()' name="select_proveedor" id="select_proveedor">
+                <option *ngFor="let pr of servicioProveedor.proveedores | async" value="{{pr.id}}">{{pr.nombre}}</option>
+              </select>
+            </div>
+            <div class="col">      
+
+              <br/>
+              <label>¡ATENCION!: Si cambia de proveedor se eliminaran los items de la lista.</label>
+            </div>
+        </div>
+      </form>
+      <br/>
+
+
+    </form>
+    <br/>
+    <h5>Informacion de la Factura </h5>
+    <br/>
+    <form>
+      <div class="row">
+        <div class="col">
+            <label for="exampleFormControlInput1">Articulos</label>
+            <select class="custom-select"  name="select_art" id="select_art">
+              <option *ngFor="let art of articulosSinAgregar" value="{{art.id}}">{{art.nombre}}</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="exampleFormControlInput1">Cantidad de Unidades</label>
+            <input type="number" class="form-control" name='cantidad' [(ngModel)]="cantidad">
+            <button class="btn btn-success" (click)="agregar()"> Agregar Articulo</button>
+        </div>
+      </div>
+    </form>
+    <br/>
+    <div style="margin-left:20px" class="form-group">
+      <button class="btn btn-success" style="margin:5px" (click)="guardar()">Generar Factura</button>
+      <button class="btn btn-default" style="margin:5px" [routerLink]="'/listacompras'">Cancelar</button>
+    </div>
+
+    <!-- Lista de Items para Facturas Tipo A -->
+    <div *ngIf="factura.tipo=='A'">
+    <table class="table table-sm table-info">
+        <thead>
+          <tr>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio Unitario</th>
+            <th scope="col">IVA</th>
+            <th scope="col">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of articulosFactura">
+            <th scope="row">{{item.cantidad}}</th>
+            <td>{{item.codigo_articulo}}</td>
+            <td>{{item.nombre_articulo}}</td>
+            <td>$ {{item.precio_compra | number:'1.2-2'}}</td>
+            <td>{{item.iva*100}}%</td>
+            <td>$ {{item.subtotal | number:'1.2-2'}}</td>
+          </tr>
+          <tr>
+            <th scope="col">Total SIN IVA: </th>
+            <th scope="col">$ {{acumuladorTotal | number:'1.2-2'}}</th>
+          </tr>
+        </tbody>
+      </table>
+    <table class="table table-sm table-danger">
+      <thead>
+        <tr>
+          <th scope="col">IVA 21</th>
+          <th scope="col">IVA 10,5</th>
+          <th scope="col">Subtotal IVA</th>
+          <th scope="col">Total General</th>
+        </tr>
+      </thead>
+      <tbody>
+        <td>$ {{acumuladorIva21 | number:'1.2-2'}}</td>
+        <td>$ {{acumuladorIva105| number:'1.2-2'}}</td>
+        <td>$ {{acumuladorIva21+acumuladorIva105 | number:'1.2-2'}}</td>
+        <td>$ {{acumuladorTotal+(acumuladorIva21+acumuladorIva105) | number:'1.2-2'}}</td>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Lista de Items para Facturas Tipo B o C -->
+  <div *ngIf="factura.tipo!='A'">
+      <table class="table table-sm table-info">
+          <thead>
+            <tr>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Codigo</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Precio Unitario</th>
+              <th scope="col">IVA</th>
+              <th scope="col">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of articulosFactura">
+              <th scope="row">{{item.cantidad}}</th>
+              <td>{{item.codigo_articulo}}</td>
+              <td>{{item.nombre_articulo}}</td>
+              <td>$ {{item.precio_compra | number:'1.2-2'}}</td>
+              <td>{{item.iva*100}}%</td>
+              <td>$ {{item.subtotal+(item.iva*item.subtotal) | number:'1.2-2'}}</td>
+            </tr>
+            <tr>
+              <th scope="col">Total: </th>
+              <th scope="col">$ {{acumuladorTotal+(acumuladorIva21+acumuladorIva105) | number:'1.2-2'}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </form>
+</div>

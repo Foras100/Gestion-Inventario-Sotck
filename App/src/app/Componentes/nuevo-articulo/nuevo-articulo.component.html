@@ -1,0 +1,53 @@
+<form style="width: 50% margin=15px" name="formul">
+    <div class="form-group">
+      <label>Codigo</label>
+      <input type="number" class="form-control" name='algo' [(ngModel)]="art.codigo" placeholder="Codigo">
+    </div>
+
+    <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" class="form-control" name='name' [(ngModel)]="art.nombre" placeholder="Nombre">
+    </div>
+
+    <div class="form-group">
+        <label>Descripcion</label>
+        <input type="text" class="form-control" name='algo2' [(ngModel)]="art.descripcion" placeholder="Descripcion">
+    </div>
+<div class="form-group">
+    <div class="form-group">
+        <label>Precio de Compra</label>
+        <input type="number" class="form-control" name='pcompra' [(ngModel)]="art.precio_compra">
+    </div>
+
+    <div class="form-group">
+      <label>Precio de Venta</label>
+      <input type="number" class="form-control" name='pventa' [(ngModel)]="art.precio_venta">
+    </div>
+  </div>
+    <div class="form-group">
+      <label>%IVA</label>
+      <select class="form-control" name="iva" [(ngModel)]="art.iva">
+        <option type="number" value="0.21" >21</option>
+        <option type="number" value="0.105" >10.5</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1" >Rubro</label>
+      <select class="form-control" name="rub"  id="rubroSeleccionado">
+        <option *ngFor="let r of rubros" value="{{r.id}}">{{r.nombre}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Proveedor</label>
+        <select class="custom-select" name="pr" id="proveedorSeleccionado">
+          <option *ngFor="let p of proveedores" value="{{p.id}}">{{p.nombre}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-success" (click)="guardar()">Ok</button>
+      <button class="btn btn-danger" [routerLink]="'/listaarticulos'">Cancelar</button>
+    </div>
+</form>

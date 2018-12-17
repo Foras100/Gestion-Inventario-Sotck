@@ -1,0 +1,66 @@
+<div style="margin:10px ">
+  <form style="width: 50% margin=15px">
+    <h3 style="margin:10px">Informacion de Articulo</h3>
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Nombre</label>
+      <input type="text" class="form-control" name='name' [(ngModel)]="articulo.nombre" placeholder="Nombre">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Descripcion</label>
+        <input type="text" class="form-control" name='algo2' [(ngModel)]="articulo.descripcion" placeholder="Descripcion">
+    </div>  
+    
+    <form>
+      <div class="row">
+        <div class="col">
+          <label for="exampleFormControlInput1">Codigo</label>
+      <input type="number" class="form-control" name='algo' [(ngModel)]="articulo.codigo" placeholder="Codigo">
+        </div>
+        <div class="col">
+          <label for="exampleFormControlSelect1" >%IVA</label>
+            <select class="form-control" name="iva" [(ngModel)]="articulo.iva">
+              <option value="0.21">21</option>
+              <option value="0.105">10.5</option>
+            </select>
+        </div>
+      </div>
+    </form>
+    <br/>
+    <form>
+      <div class="row">
+        <div class="col">
+          <label for="exampleFormControlSelect1" >Rubro</label>
+            <select class="form-control" required  id="select_rubro" >
+              <option *ngFor="let r of servicioRubro.rubros | async" value="{{r.id}}" >{{r.nombre}}</option>
+            </select>
+        </div>
+        <div class="col">
+          <label for="exampleFormControlSelect1">Proveedor</label>
+            <select class="form-control" required  id="select_proveedor" >
+              <option *ngFor="let p of servicioProveedor.proveedores | async" [value]="p.id">{{p.nombre}}</option>
+            </select>
+        </div>
+      </div>
+    </form>
+    <br/>
+    <form>
+      <div class="row">
+        <div class="col">
+          <label for="exampleFormControlInput1">Precio Compra</label>
+          <input type="number" class="form-control" name='precio_compra' [(ngModel)]="articulo.precio_compra" placeholder="0">
+        </div>
+        <div class="col">
+          <label for="exampleFormControlInput1">Precio Venta</label>
+          <input type="number" class="form-control" name='precio_venta' [(ngModel)]="articulo.precio_venta" placeholder="0">
+        </div>
+      </div>
+    </form>
+    <br/>
+    <div class="form-group">
+      <button style="margin:5px" class="btn btn-success" (click)="guardar()">Ok</button>
+      <button style="margin:5px" class="btn btn-danger" (click)="borrar()">Borrar</button>
+      <button style="margin:5px" class="btn btn-default" [routerLink]="'/listaarticulos'">Cancelar</button>
+    </div>
+  </form>
+</div>

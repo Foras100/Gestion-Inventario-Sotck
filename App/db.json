@@ -1,0 +1,159 @@
+{
+  "cliente": [
+    {
+      "id": 1,
+      "nombre": "Foras",
+      "dni": 39032241,
+      "direccion": "Concordia 1482, San Benito, Entre Rios"
+    },
+    {
+      "id": 2,
+      "nombre": "Raul",
+      "dni": 12903089,
+      "direccion": "La Paz 345, Parana, Entre Rios"
+    }
+  ],
+  "rubro":[
+    {
+      "id":1,
+      "nombre":"Bebidas",
+      "descripcion":"",
+      "ubicacion":"Estanteria 4"
+    },
+    {
+      "id":2,
+      "nombre":"Almacen",
+      "descripcion":"",
+      "ubicacion":"Estanteria 6"
+    }
+  ],
+  "proveedor": [
+    {
+      "id": 1,
+      "nombre": "Arcor",
+      "cuit": 20390322411,
+      "direccion": "parana 1453, Bs As"
+    },
+    {
+      "id": 2,
+      "nombre": "Coca-Cola",
+      "cuit": 20230922061,
+      "direccion": "9 de julio 165, Bs As"
+    }
+  ],
+  "articulo": [
+    {
+      "id": 1,
+      "id_proveedor": 2,
+      "codigo": 5412,
+      "nombre": "Botella 2.25 lts Coca-Cola",
+      "descripcion": "Botella de 2.25 litros de coca-cola comun envase no retornable",
+      "id_rubro": 1,
+      "precio_compra": 52.32,
+      "precio_venta": 55,
+      "stock": 15,
+      "iva": 21
+    },
+    {
+      "id": 2,
+      "id_proveedor": 2,
+      "codigo": 5415,
+      "nombre": "Botella 2.25 lts Sprite",
+      "descripcion": "Botella de 2.25 litros de Sprite comun envase no retornable",
+      "id_rubro": 1,
+      "precio_compra": 49.65,
+      "precio_venta": 54.99,
+      "stock": 10,
+      "iva": 21
+    },
+    {
+      "id": 3,
+      "id_proveedor": 1,
+      "codigo": 3212,
+      "nombre": "Galletitas Surtidas x 500 gr.",
+      "descripcion": "Galletitas surtidas de Arcor de 500 gr. con 6 tipos de galletitas",
+      "id_rubro": 2,
+      "precio_compra": 31,
+      "precio_venta": 34.56,
+      "stock": 9,
+      "iva": 10.5
+    },
+    {
+      "codigo": "12",
+      "nombre": "Botella x 1.25 lts Coca-Cola Zero",
+      "descripcion": "Coca-Cola sin azucar",
+      "id_rubro": 1,
+      "precio_compra": null,
+      "precio_venta": null,
+      "stock": null,
+      "iva": "21",
+      "id": 4
+    },
+    {
+      "codigo": "9871",
+      "nombre": "Galletitas Criollitas x 5",
+      "descripcion": "Galletitas de agua.",
+      "id_rubro": 2,
+      "precio_compra": null,
+      "precio_venta": null,
+      "stock": 0,
+      "iva": "21",
+      "id": 5
+    }
+  ],
+  "factura": [
+    {
+      "id": 1,
+      "fecha": "2018-11-18T01:30:38.732Z",
+      "nro_sucursal": 2,
+      "nro_correlativo": 1,
+      "tipo": "A",
+      "id_proveedor": 2,
+      "id_cliente": null
+    },
+    {
+      "id": 2,
+      "fecha": "2018-11-18T01:30:38.732Z",
+      "nro_sucursal": 1,
+      "nro_correlativo": 1,
+      "tipo": "B",
+      "id_proveedor": 1,
+      "id_cliente": null
+    },
+    {
+      "id": 3,
+      "fecha": "2018-11-18T01:30:38.732Z",
+      "nro_sucursal": 1,
+      "nro_correlativo": 1,
+      "tipo": "A",
+      "id_proveedor": null,
+      "id_cliente": 1
+    }
+  ],
+  "factura_item": [
+    {
+      "id": 1,
+      "id_factura": 1,
+      "id_articulo": 1,
+      "cantidad": 15
+    },
+    {
+      "id": 2,
+      "id_factura": 1,
+      "id_articulo": 2,
+      "cantidad": 10
+    },
+    {
+      "id": 3,
+      "id_factura": 2,
+      "id_articulo": 3,
+      "cantidad": 15
+    },
+    {
+      "id": 4,
+      "id_factura": 3,
+      "id_articulo": 3,
+      "cantidad": 6
+    }
+  ]
+}

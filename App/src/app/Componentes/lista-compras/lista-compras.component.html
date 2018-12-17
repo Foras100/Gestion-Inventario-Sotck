@@ -1,0 +1,23 @@
+<div style="margin:10px">
+<h3 style="margin:10px">Facturas de Compras</h3>
+<table class="table table-info">
+  <thead>
+    <tr>
+      <th scope="col">Nro. Comprobante</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Monto Total</th>
+      <th scope="col"><button class="btn btn-info" [routerLink]="'/nuevacompra'">NUEVO</button></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let f of servicioFactura.facturasCompra | async ">
+      <th scope="row">{{f.nro_sucursal}}-{{f.nro_correlativo}}</th>
+      <td>{{f.fecha | date:'dd/MM/yyyy'}}</td>
+      <td>{{f.tipo}}</td>
+      <td>$ {{f.total | number:'1.2-2'}}</td>
+      <td><button class="btn btn-success" (click)="mostrarInfo(f.id)">INFO</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>
