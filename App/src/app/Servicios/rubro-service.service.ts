@@ -20,4 +20,7 @@ export class RubroServiceService {
   getRubro(id:number){
     return this.http.get<Rubro>(this.host+"rubros/"+id);
   }
+  guardarRubro(r:Rubro){
+    return this.http.post(this.host+"rubros",r);
+  }
 }

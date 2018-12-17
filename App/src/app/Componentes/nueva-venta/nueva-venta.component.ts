@@ -6,6 +6,7 @@ import { FacturaItem } from '../../Clases/factura-item';
 import { Articulo } from '../../Clases/articulo';
 import { Factura } from '../../Clases/factura';
 import { FacturaServiceService } from '../../Servicios/factura-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nueva-venta',
@@ -17,8 +18,8 @@ export class NuevaVentaComponent implements OnInit {
   articulosSinAgregar:Articulo[]=[];
   articulosFactura:FacturaItem[]=[];
   factura:Factura=new Factura(new Date(),1,1,'A',null,0,0);
+  nro_correlativo:number=1;
   cantidad:number=1;
-  cantidades:number=1;
   acumuladorIva21:number=0;
   acumuladorIva105:number=0;
   acumuladorTotal:number=0;
@@ -26,8 +27,9 @@ export class NuevaVentaComponent implements OnInit {
   constructor(private servicioRubro:RubroServiceService,
               private servicioCliente:ClienteServiceService,
               private servicioArticulo:ArticuloServiceService,
-              private servicioFactura:FacturaServiceService) {
-
+              private servicioFactura:FacturaServiceService,
+              private router:Router) {
+    this.getNroCorrelativo();
   }
   quitarItem(item:FacturaItem){
     let arrayAuxiliar:FacturaItem[]=[];
@@ -45,9 +47,26 @@ export class NuevaVentaComponent implements OnInit {
     }
     this.acumuladorTotal-=item.subtotal;
     this.articulosFactura=arrayAuxiliar;
+    this.actualizarListaSinAgregar();
+  }
+  checkearSuficienteStock(){
+    let id_articulo=parseInt((<HTMLInputElement>document.getElementById('select_art')).value);
+    for(var i=0;i<this.articulosSinAgregar.length;i++){
+      if(this.articulosSinAgregar[i].id==id_articulo){
+        if(this.articulosSinAgregar[i].stock<this.cantidad){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+    }
   }
   agregar(){
-    if(this.cantidad>0 && ((<HTMLInputElement>document.getElementById('select_art')).value)!= null){
+    if(this.checkearSuficienteStock()){
+      alert("Stock Insuficiente!!");
+    }
+    else{
       let id_articulo=parseInt((<HTMLInputElement>document.getElementById('select_art')).value);
       for(var i=0;i<this.articulosSinAgregar.length;i++){
         if(id_articulo==this.articulosSinAgregar[i].id){
@@ -61,7 +80,6 @@ export class NuevaVentaComponent implements OnInit {
                                     this.articulosSinAgregar[i].nombre,
                                     parseFloat(this.articulosSinAgregar[i].iva.toString()),
                                     (this.articulosSinAgregar[i].precio_venta*this.cantidad));
-            console.log(it);
             this.articulosFactura.push(it);
             this.acumuladorTotal+=it.subtotal;
             if(it.iva==0.21){
@@ -71,18 +89,11 @@ export class NuevaVentaComponent implements OnInit {
             this.acumuladorIva105+=it.subtotal*0.105;
             }
           }
-          else{
-            alert("Stock insuficiente!!!")
-          }
-          
         }
       }
       this.actualizarListaSinAgregar();
       
       this.cantidad=1;
-    }
-    else{
-      alert("La cantidad debe ser mayor a 0");
     }
   }
   actualizarListaSinAgregar(){
@@ -95,6 +106,7 @@ export class NuevaVentaComponent implements OnInit {
           if(!this.checkearItemFactura(ar[i])&& ar[i].stock>0)
             this.articulosSinAgregar.push(ar[i])
         }
+        this.cantidad=1;
       })
     }
     else{
@@ -103,9 +115,10 @@ export class NuevaVentaComponent implements OnInit {
           if(ar[i].id_rubro==id_rubro && !this.checkearItemFactura(ar[i]) && ar[i].stock>0)
             this.articulosSinAgregar.push(ar[i])
         }
+        this.cantidad=1;
       })
     }
-    this.actualizarCantidad();
+
   }
   checkearItemFactura(art:Articulo){
     if(this.articulosFactura!=[]){
@@ -119,9 +132,9 @@ export class NuevaVentaComponent implements OnInit {
   guardar(){
     // console.log(this.factura);
     // console.log(this.articulosFactura);
-    console.log(this.articulosFactura)
+    //console.log(this.articulosFactura)
     if(this.factura.nro_sucursal<1||this.factura.nro_sucursal==null||
-        this.factura.nro_correlativo<1||this.factura.nro_correlativo==null||
+        this.nro_correlativo<1||this.nro_correlativo==null||
         this.factura.fecha==null||
         this.factura.tipo==null){
           alert("Faltan campos por completar o hay campos en valor negativo");
@@ -129,27 +142,36 @@ export class NuevaVentaComponent implements OnInit {
         else if(this.articulosFactura.length==0){
           alert("La Factura no tiene items cargados");
         }
-        else if(this.servicioFactura.checkExistsCodigoFacturaVenta(this.factura.nro_sucursal,this.factura.nro_correlativo)){
+        else if(this.servicioFactura.checkExistsCodigoFacturaVenta(this.factura.nro_sucursal,this.nro_correlativo)){
           alert("El numero de sucursal y correlativo coinciden con una factura existente! Chequee las numeros ingresados")        
         }
         else{
           //console.log("generar venta")
+
           this.factura.id_cliente=parseInt((<HTMLInputElement>document.getElementById('select_cliente')).value);
+          this.factura.nro_correlativo=this.nro_correlativo;
           let sumador:number=0;
           for(var i=0;i<this.articulosFactura.length;i++){
             sumador+=((<number>this.articulosFactura[i].iva*<number>this.articulosFactura[i].subtotal)+<number>this.articulosFactura[i].subtotal);
           }
-          this.factura.total=sumador;
-          //console.log(this.factura);
-
+          this.factura.total=parseFloat(sumador.toString());
+          // console.log(this.factura);
+          // console.log(this.articulosFactura);
           this.servicioFactura.guardarFactura(this.factura).subscribe(f=>{
             this.servicioFactura.guardarItemsVenta(this.articulosFactura,(<Factura>f).id)
+          this.router.navigate(["/listaventas"]);
           })
         }
   }
-  actualizarCantidad(){
-    let id_articulo=parseInt((<HTMLInputElement>document.getElementById('select_art')).value);
-    this.servicioArticulo.getArticulo(id_articulo).subscribe(ar=>this.cantidades=ar.stock)
+
+  getNroCorrelativo(){
+    this.servicioFactura.facturasVenta.subscribe(fac=>{
+      for(var i=0;i<fac.length;i++){
+        if(fac[i].nro_correlativo>=this.nro_correlativo){
+          this.nro_correlativo=fac[i].nro_correlativo+1;
+        }
+      }
+    })
   }
   ngOnInit() {
   }

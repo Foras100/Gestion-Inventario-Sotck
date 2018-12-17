@@ -1,3 +1,21 @@
-<p>
-  nuevo-rubro works!
-</p>
+<div style="margin:10px">
+  <form style="width: 50% margin=25px">
+    <form>
+      <div class="row">
+        <div class="col">
+          <label>Nombre: </label>
+          <input type="text" class="form-control" name='nombre' [(ngModel)]="rubro.nombre">
+        </div>
+        <div class="col">
+          <label>Descripcion: </label>
+          <input type="text" class="form-control" name='descripcion' [(ngModel)]="rubro.descripcion">
+        </div>
+        <div class="col">
+            <label>Ubicacion: </label>
+            <input type="text" class="form-control" name='ubicacion' [(ngModel)]="rubro.ubicacion">
+          </div>
+      </div>
+      <br/>
+      <form>
+    </form>
+</div>

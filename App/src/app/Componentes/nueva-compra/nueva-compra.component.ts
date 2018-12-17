@@ -7,6 +7,7 @@ import { Articulo } from '../../Clases/articulo';
 import { Observable } from 'rxjs';
 import { FacturaServiceService } from '../../Servicios/factura-service.service';
 import { Router } from '@angular/router';
+import { RubroServiceService } from '../../Servicios/rubro-service.service';
 
 
 
@@ -27,8 +28,11 @@ export class NuevaCompraComponent implements OnInit {
   acumuladorIva105:number=0;
   acumuladorTotal:number=0;
 
-  constructor(private servicioProveedor:ProveedorServiceService, private servicioArticulo:ArticuloServiceService,
-              private servicioFactura:FacturaServiceService,private router:Router) { 
+  constructor(private servicioProveedor:ProveedorServiceService,
+              private servicioArticulo:ArticuloServiceService,
+              private servicioFactura:FacturaServiceService,
+              private servicioRubro:RubroServiceService,
+              private router:Router) { 
   }
   agregar(){
     if(this.cantidad>0){
@@ -70,15 +74,37 @@ export class NuevaCompraComponent implements OnInit {
     // });
   }
   actualizarListaSinAgregar(){
-    var id_proveedor:number=parseInt((<HTMLInputElement>document.getElementById('select_proveedor')).value);
+    let id_rubro:number=parseInt((<HTMLInputElement>document.getElementById('select_filtro_rubro')).value);
+    let id_proveedor:number=parseInt((<HTMLInputElement>document.getElementById('select_proveedor')).value);
     this.articulosSinAgregar=[];
-    this.servicioArticulo.articulos.subscribe(ar=>{
-      for(var i=0;i<ar.length;i++){
-        if(ar[i].id_proveedor==id_proveedor && !this.checkearItemFactura(ar[i])){
-          this.articulosSinAgregar.push(ar[i])
+
+    if(id_rubro==0){
+      this.servicioArticulo.articulos.subscribe(ar=>{
+        for(var i=0;i<ar.length;i++){
+          if(!this.checkearItemFactura(ar[i])&& ar[i].stock>0 && ar[i].id_proveedor==id_proveedor)
+            this.articulosSinAgregar.push(ar[i])
         }
-      }
-    })
+        this.cantidad=1;
+      })
+    }
+    else{
+      this.servicioArticulo.articulos.subscribe(ar=>{
+        for(var i=0;i<ar.length;i++){
+          if(ar[i].id_rubro==id_rubro && !this.checkearItemFactura(ar[i]) && ar[i].stock>0 && ar[i].id_proveedor==id_proveedor)
+            this.articulosSinAgregar.push(ar[i])
+        }
+        this.cantidad=1;
+      })
+    }
+    // var id_proveedor:number=parseInt((<HTMLInputElement>document.getElementById('select_proveedor')).value);
+    // this.articulosSinAgregar=[];
+    // this.servicioArticulo.articulos.subscribe(ar=>{
+    //   for(var i=0;i<ar.length;i++){
+    //     if(ar[i].id_proveedor==id_proveedor && !this.checkearItemFactura(ar[i])){
+    //       this.articulosSinAgregar.push(ar[i])
+    //     }
+    //   }
+    // })
   }
   cargarArticulos(){
     //console.log("carga de productos de ese proveedor");

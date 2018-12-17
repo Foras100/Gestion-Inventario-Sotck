@@ -52,6 +52,14 @@
     <form>
       <div class="row">
         <div class="col">
+            <label>Fitrar por Rubro</label>
+            <select class="custom-select" (click)="actualizarListaSinAgregar()"  name="select_filtro_rubro" id="select_filtro_rubro">
+              <option value="null"></option>
+              <option value="0">Todos los rubros...</option>    
+              <option *ngFor="let r of servicioRubro.rubros | async" value="{{r.id}}">{{r.nombre}}</option>
+            </select>
+        </div>
+        <div class="col">
             <label for="exampleFormControlInput1">Articulos</label>
             <select class="custom-select"  name="select_art" id="select_art">
               <option *ngFor="let art of articulosSinAgregar" value="{{art.id}}">{{art.nombre}}</option>

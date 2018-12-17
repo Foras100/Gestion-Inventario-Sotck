@@ -1,5 +1,5 @@
 <div style="margin:10px">
-    <h3 style="margin:10px">Nueva Factura de Compra</h3>
+    <h3 style="margin:10px">Nueva Factura de Venta</h3>
     <h5>Informacion de la Factura </h5>
     <form style="width: 50% margin=15px" name="formul">
       
@@ -10,8 +10,8 @@
             <input type="number" class="form-control" name='sucursal' [(ngModel)]="factura.nro_sucursal">
           </div>
           <div class="col">
-            <label>Numero Correlativo</label>
-            <input type="number" class="form-control" name='correlativo' [(ngModel)]="factura.nro_correlativo">
+            <br>
+            <label>Numero Correlativo:  {{nro_correlativo}}</label>
           </div>
           <div class="col">
               <label>Tipo</label>
@@ -55,14 +55,14 @@
           </div>
           <div class="col">
               <label>Articulos</label>
-              <select class="custom-select" (click)="actualizarCantidad()" name="select_art" id="select_art">
-                <option value="null"></option>
+              <select class="custom-select" name="select_art" id="select_art">
+                <option value="0"></option>
                 <option *ngFor="let art of articulosSinAgregar" value="{{art.id}}">{{art.nombre}}</option>
               </select>
           </div>
           <div class="col">
               <label>Cantidad de Unidades</label>
-              <input type="number" class="form-control" name='cantidad' min=1 max="{{cantidades}}" [(ngModel)]="cantidad">
+              <input type="number" class="form-control" name='cantidad' min=1 [(ngModel)]="cantidad">
               <!-- <select class="custom-select" [(ngModel)]="cantidad"  name="select_cantidad" id="select_cantidad">
                   <option *ngFor="let cant of cantidades" value="{{cant}}">{{cant}}</option>
                 </select> -->
@@ -73,7 +73,7 @@
       <br/>
       <div style="margin-left:20px" class="form-group">
         <button class="btn btn-success" style="margin:5px" (click)="guardar()">Generar Factura</button>
-        <button class="btn btn-default" style="margin:5px" [routerLink]="'/listacompras'">Cancelar</button>
+        <button class="btn btn-default" style="margin:5px" [routerLink]="'/listaventas'">Cancelar</button>
       </div>
   
       <!-- Lista de Items para Facturas Tipo A -->

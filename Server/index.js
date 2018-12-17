@@ -18,30 +18,30 @@ var factura=sequelize.define("factura",{
     nro_sucursal:{type: Sequelize.INTEGER},
     nro_correlativo:{type: Sequelize.INTEGER},
     tipo: {type: Sequelize.STRING},
-    id_proveedor:{type: Sequelize.NUMERIC},
-    id_cliente:{type: Sequelize.NUMERIC},
-    total:{type: Sequelize.NUMERIC}
+    id_proveedor:{type: Sequelize.INTEGER},
+    id_cliente:{type: Sequelize.INTEGER},
+    total:{type: Sequelize.DOUBLE}
 });
 var factura_item=sequelize.define("factura_item",{
-    id_factura:{type: Sequelize.NUMERIC},
-    id_articulo:{type: Sequelize.NUMERIC},
+    id_factura:{type: Sequelize.INTEGER},
+    id_articulo:{type: Sequelize.INTEGER},
     cantidad:{type: Sequelize.INTEGER},
-    precio_compra:{type: Sequelize.NUMERIC},
-    precio_venta:{type: Sequelize.NUMERIC},
+    precio_compra:{type: Sequelize.DOUBLE},
+    precio_venta:{type: Sequelize.DOUBLE},
 
-    codigo_articulo:{type: Sequelize.NUMERIC},
+    codigo_articulo:{type: Sequelize.INTEGER},
     nombre_articulo:{type: Sequelize.STRING},
-    iva:{type: Sequelize.NUMERIC},
-    subtotal:{type: Sequelize.NUMERIC}
+    iva:{type: Sequelize.DOUBLE},
+    subtotal:{type: Sequelize.DOUBLE}
 });
 var articulo=sequelize.define("articulo",{
-    id_proveedor:{type: Sequelize.NUMERIC},
+    id_proveedor:{type: Sequelize.INTEGER},
     codigo:{type: Sequelize.INTEGER},
     nombre: {type: Sequelize.STRING},
     descripcion: {type: Sequelize.STRING},
-    id_rubro:{type: Sequelize.NUMERIC},
-    precio_compra:{type: Sequelize.NUMERIC},
-    precio_venta:{type: Sequelize.NUMERIC},
+    id_rubro:{type: Sequelize.INTEGER},
+    precio_compra:{type: Sequelize.DOUBLE},
+    precio_venta:{type: Sequelize.DOUBLE},
     stock:{type: Sequelize.INTEGER},
     iva:{type: Sequelize.NUMERIC}
 });
@@ -242,7 +242,7 @@ app.post('/factura',function(req,res){
     var _nro_correlativo=req.body.nro_correlativo;
     var _tipo=req.body.tipo;
     var _id_proveedor=req.body.id_proveedor;
-    var _id_cliente=req.body._id_cliente;
+    var _id_cliente=req.body.id_cliente;
     var _total=req.body.total;
     factura.create({fecha:_fecha,nro_sucursal:_nro_sucursal,
         nro_correlativo:_nro_correlativo,tipo:_tipo,id_cliente:_id_cliente,

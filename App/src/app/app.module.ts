@@ -21,6 +21,7 @@ import { NuevoArticuloComponent } from './Componentes/nuevo-articulo/nuevo-artic
 import {HttpClientModule} from '@angular/common/http';
 import { NuevoRubroComponent } from './Componentes/nuevo-rubro/nuevo-rubro.component';
 import { InfoRubroComponent } from './Componentes/info-rubro/info-rubro.component';
+import { ListaRubrosComponent } from './Componentes/lista-rubros/lista-rubros.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { InfoRubroComponent } from './Componentes/info-rubro/info-rubro.componen
     NuevaVentaComponent,
     NuevoArticuloComponent,
     NuevoRubroComponent,
-    InfoRubroComponent
+    InfoRubroComponent,
+    ListaRubrosComponent
   ],
   imports: [
     BrowserModule,

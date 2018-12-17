@@ -41,8 +41,8 @@ export class NuevoArticuloComponent implements OnInit {
       this.art.iva=parseFloat(this.art.iva.toString())
       console.log(this.art);
 
-       this.servicioarticulo.guardarArticulo(this.art);
-       this.router.navigate(['/listaarticulos'])
+      this.servicioarticulo.guardarArticulo(this.art);
+      this.router.navigate(['/listaarticulos'])
     }
   }
 
