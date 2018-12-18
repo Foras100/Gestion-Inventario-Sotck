@@ -1,3 +1,32 @@
-<p>
-  info-rubro works!
-</p>
+<div style="margin:10px">
+    <h3>Informacion del Rubro </h3>
+    <form style="width: 50% margin=25px">
+      <form>
+        <div class="row">
+          <div class="col-md-4">
+            <div>
+              <label>Nombre: </label>
+              <input type="text" class="form-control" name='nombre' [(ngModel)]="rubro.nombre">
+            </div>
+            <br>
+            <div>
+              <label>Descripcion: </label>
+              <input type="text" class="form-control" name='descripcion' [(ngModel)]="rubro.descripcion">
+            </div>
+            <br>
+            <div>
+                <label>Ubicacion: </label>
+                <input type="text" class="form-control" name='ubicacion' [(ngModel)]="rubro.ubicacion">
+            </div>
+            <div style="margin:15px" class="form-group">
+                <button style="margin:5px" class="btn btn-success" (click)="guardar()">OK <img src="https://img.icons8.com/ios/28/000000/checkmark.png"></button>
+                <button style="margin:5px" class="btn btn-danger" (click)="borrar()">Borrar <img src="https://img.icons8.com/windows/28/000000/delete.png"></button>
+                <button style="margin:5px" class="btn btn-default" [routerLink]="'/listarubros'">Cancelar <img src="https://img.icons8.com/ios-glyphs/29/000000/delete-sign.png"></button>
+            </div>
+          </div>
+        </div>
+        <br/>
+      </form>
+      </form>
+  </div>
+  

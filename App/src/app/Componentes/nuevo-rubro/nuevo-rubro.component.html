@@ -1,21 +1,30 @@
 <div style="margin:10px">
+  <h3>Nuevo Rubro </h3>
   <form style="width: 50% margin=25px">
     <form>
       <div class="row">
-        <div class="col">
-          <label>Nombre: </label>
-          <input type="text" class="form-control" name='nombre' [(ngModel)]="rubro.nombre">
-        </div>
-        <div class="col">
-          <label>Descripcion: </label>
-          <input type="text" class="form-control" name='descripcion' [(ngModel)]="rubro.descripcion">
-        </div>
-        <div class="col">
-            <label>Ubicacion: </label>
-            <input type="text" class="form-control" name='ubicacion' [(ngModel)]="rubro.ubicacion">
+        <div class="col-md-4">
+          <div>
+            <label>Nombre: </label>
+            <input type="text" class="form-control" name='nombre' [(ngModel)]="rubro.nombre" placeholder="Nombre...">
           </div>
+          <br>
+          <div>
+            <label>Descripcion: </label>
+            <input type="text" class="form-control" name='descripcion' [(ngModel)]="rubro.descripcion" placeholder="Descripcion...">
+          </div>
+          <br>
+          <div>
+              <label>Ubicacion: </label>
+              <input type="text" class="form-control" name='ubicacion' [(ngModel)]="rubro.ubicacion" placeholder="Ubicacion...">
+          </div>
+          <div style="margin:15px" class="form-group">
+              <button style="margin:5px" class="btn btn-success" (click)="guardar()">OK <img src="https://img.icons8.com/ios/28/000000/checkmark.png"></button>
+              <button style="margin:5px" class="btn btn-default" [routerLink]="'/listarubros'">Cancelar <img src="https://img.icons8.com/ios-glyphs/29/000000/delete-sign.png"></button>
+          </div>
+        </div>
       </div>
       <br/>
-      <form>
+    </form>
     </form>
 </div>

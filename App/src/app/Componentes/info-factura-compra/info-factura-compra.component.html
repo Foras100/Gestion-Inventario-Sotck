@@ -11,7 +11,8 @@
             <h5>Tipo Factura: "{{factura.tipo}}"</h5><br>
             <h5>Proveedor: {{proveedor.nombre}}</h5><br>
             <div style="margin-left:10px" class="form-group">
-              <button class="btn btn-success" style="margin:5px" [routerLink]="'/listacompras'">Volver a la Lista de Facturas de Compras</button>
+              <button style="margin:5px" class="btn btn-success" [routerLink]="'/listacompras'">OK <img src="https://img.icons8.com/ios/28/000000/checkmark.png"></button>
+              <button style="margin:5px" class="btn btn-danger" (click)="borrar()">Borrar <img src="https://img.icons8.com/windows/28/000000/delete.png"></button>
             </div>
         </div>
 

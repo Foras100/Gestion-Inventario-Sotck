@@ -1,25 +1,27 @@
-<h3 style="margin:10px">Articulos</h3>
-<table class="table table-info">
-  <thead>
-    <tr>
-      <th scope="col">Codigo Producto</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Precio Compra</th>
-      <th scope="col">Precio Venta</th>
-      <th scope="col">ID Rubro</th>
-      <th scope="col">STOCK</th>
-      <th scope="col"><button class="btn btn-info" [routerLink]="'/nuevoarticulo'">NUEVO</button></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let a of servicioArticulo.articulos | async ">
-      <th scope="row">{{a.codigo}}</th>
-      <td>{{a.nombre}}</td>
-      <td>$ {{a.precio_compra | number:'1.2-2'}}</td>
-      <td>$ {{a.precio_venta | number:'1.2-2'}}</td>
-      <td>{{a.id_rubro}}</td>
-      <td>{{a.stock}}</td>
-      <td><button class="btn btn-success" (click)="mostrarInfo(a.id)">EDITAR</button></td>
-    </tr>
-  </tbody>
-</table>
+<div style="margin:15px">
+  <h3 style="margin:10px">Articulos</h3>
+  <table class="table table-info">
+    <thead>
+      <tr>
+        <th scope="col">Codigo Producto</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Precio Compra</th>
+        <th scope="col">Precio Venta</th>
+        <th scope="col">ID Rubro</th>
+        <th scope="col">STOCK</th>
+        <th scope="col"><button class="btn btn-info" [routerLink]="'/nuevoarticulo'">NUEVO</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of servicioArticulo.articulos | async ">
+        <th scope="row">{{a.codigo}}</th>
+        <td>{{a.nombre}}</td>
+        <td>$ {{a.precio_compra | number:'1.2-2'}}</td>
+        <td>$ {{a.precio_venta | number:'1.2-2'}}</td>
+        <td>{{a.id_rubro}}</td>
+        <td>{{a.stock}}</td>
+        <td><button class="btn btn-success" (click)="mostrarInfo(a.id)"><img src="https://img.icons8.com/windows/25/000000/info.png"><img src="https://img.icons8.com/ios-glyphs/25/000000/pencil.png"></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

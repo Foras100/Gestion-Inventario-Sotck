@@ -6,7 +6,7 @@ var bodyparser=require('body-parser');
 
 //Importamos sequelize
 var Sequelize=require('sequelize');
-var sequelize = new Sequelize("postgres://postgres:postgres@localhost:5432/TPLaboratorio218")
+var sequelize = new Sequelize("postgres://postgres:postgres@localhost:5432/Laboratorio2018")
 
 var cliente= sequelize.define("cliente",{
     nombre: {type: Sequelize.STRING},

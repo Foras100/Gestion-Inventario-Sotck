@@ -62,6 +62,7 @@
         <div class="col">
             <label for="exampleFormControlInput1">Articulos</label>
             <select class="custom-select"  name="select_art" id="select_art">
+              <option></option>
               <option *ngFor="let art of articulosSinAgregar" value="{{art.id}}">{{art.nombre}}</option>
             </select>
         </div>
@@ -99,6 +100,7 @@
             <td>$ {{item.precio_compra | number:'1.2-2'}}</td>
             <td>{{item.iva*100}}%</td>
             <td>$ {{item.subtotal | number:'1.2-2'}}</td>
+            <td><button (click)="quitarItem(item)"><img src="https://img.icons8.com/material-outlined/25/000000/cancel.png"></button></td>
           </tr>
           <tr>
             <th scope="col">Total SIN IVA: </th>
@@ -145,6 +147,7 @@
               <td>$ {{item.precio_compra | number:'1.2-2'}}</td>
               <td>{{item.iva*100}}%</td>
               <td>$ {{item.subtotal+(item.iva*item.subtotal) | number:'1.2-2'}}</td>
+              <td><button (click)="quitarItem(item)"><img src="https://img.icons8.com/material-outlined/25/000000/cancel.png"></button></td>
             </tr>
             <tr>
               <th scope="col">Total: </th>

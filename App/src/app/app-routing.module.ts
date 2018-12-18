@@ -18,6 +18,7 @@ import { NuevoArticuloComponent } from './Componentes/nuevo-articulo/nuevo-artic
 import { ListaRubrosComponent } from './Componentes/lista-rubros/lista-rubros.component';
 import { NuevoRubroComponent } from './Componentes/nuevo-rubro/nuevo-rubro.component';
 import { InfoRubroComponent } from './Componentes/info-rubro/info-rubro.component';
+import { InicioComponent } from './Componentes/inicio/inicio.component';
 
 const routes: Routes = [
   {path:'listaarticulos',component: ListaArticulosComponent},
@@ -38,8 +39,9 @@ const routes: Routes = [
   {path:'infofacturacompra/:id',component: InfoFacturaCompraComponent},
   {path:'infofacturaventa/:id',component: InfoFacturaVentaComponent},
   {path:'inforubro/:id',component: InfoRubroComponent},
+  {path:'inicio',component: InicioComponent},
 
-  {path:'', redirectTo:'listaarticulos', pathMatch:'full'}
+  {path:'', redirectTo:'inicio', pathMatch:'full'}
 ];
 
 @NgModule({

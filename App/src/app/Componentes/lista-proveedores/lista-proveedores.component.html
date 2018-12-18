@@ -1,19 +1,21 @@
-<h3 style="margin:10px">Proveedores</h3>
-<table class="table table-info">
-  <thead>
-    <tr>
-      <th scope="col">CUIT</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Direccion</th>
-      <th scope="col"><button class="btn btn-info" [routerLink]="'/nuevoproveedor'">NUEVO</button></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let p of servicioProveedor.proveedores | async ">
-      <th scope="row">{{p.cuit}}</th>
-      <td>{{p.nombre}}</td>
-      <td>{{p.direccion}}</td>
-      <td><button class="btn btn-success" (click)="mostrarInfo(p.id)">EDITAR</button></td>
-    </tr>
-  </tbody>
-</table>
+<div style="margin:15px">
+  <h3 style="margin:10px">Proveedores</h3>
+  <table class="table table-info">
+    <thead>
+      <tr>
+        <th scope="col">CUIT</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Direccion</th>
+        <th scope="col"><button class="btn btn-info" [routerLink]="'/nuevoproveedor'">NUEVO</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of servicioProveedor.proveedores | async ">
+        <th scope="row">{{p.cuit}}</th>
+        <td>{{p.nombre}}</td>
+        <td>{{p.direccion}}</td>
+        <td><button class="btn btn-success" (click)="mostrarInfo(p.id)"><img src="https://img.icons8.com/windows/25/000000/info.png"><img src="https://img.icons8.com/ios-glyphs/25/000000/pencil.png"></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -21,6 +21,12 @@ export class RubroServiceService {
     return this.http.get<Rubro>(this.host+"rubros/"+id);
   }
   guardarRubro(r:Rubro){
-    return this.http.post(this.host+"rubros",r);
+    return this.http.post(this.host+"rubro",r);
+  }
+  updateRubro(r:Rubro){
+    return this.http.put(this.host+"rubro/"+r.id,r);
+  }
+  borrarRubro(id:number){
+    return this.http.delete(this.host+"rubro/"+id);
   }
 }

@@ -72,8 +72,8 @@
       </form>
       <br/>
       <div style="margin-left:20px" class="form-group">
-        <button class="btn btn-success" style="margin:5px" (click)="guardar()">Generar Factura</button>
-        <button class="btn btn-default" style="margin:5px" [routerLink]="'/listaventas'">Cancelar</button>
+          <button style="margin:5px" class="btn btn-success" (click)="guardar()">Generar Factura <img src="https://img.icons8.com/ios/28/000000/checkmark.png"></button>
+          <button style="margin:5px" class="btn btn-default" [routerLink]="'/listaventas'">Cancelar <img src="https://img.icons8.com/ios-glyphs/29/000000/delete-sign.png"></button>
       </div>
   
       <!-- Lista de Items para Facturas Tipo A -->
@@ -97,7 +97,7 @@
               <td>$ {{item.precio_venta | number:'1.2-2'}}</td>
               <td>{{item.iva*100}}%</td>
               <td>$ {{item.subtotal | number:'1.2-2'}}</td>
-              <td><button (click)="quitarItem(item)">QUITAR</button></td>
+              <td><button (click)="quitarItem(item)"><img src="https://img.icons8.com/material-outlined/25/000000/cancel.png"></button></td>
             </tr>
             <tr>
               <th scope="col">Total SIN IVA: </th>
@@ -144,7 +144,7 @@
                 <td>$ {{item.precio_venta | number:'1.2-2'}}</td>
                 <td>{{item.iva*100}}%</td>
                 <td>$ {{item.subtotal+(item.iva*item.subtotal) | number:'1.2-2'}}</td>
-                <td><button (click)="quitarItem(item)">QUITAR</button></td>
+                <td><button (click)="quitarItem(item)"><img src="https://img.icons8.com/material-outlined/25/000000/cancel.png"></button></td>
               </tr>
               <tr>
                 <th scope="col">Total: </th>

@@ -1,56 +1,59 @@
 <div style="margin:10px">
-  <h3 style="margin:10px">Nueva Factura de Compra</h3>
+  <h3 style="margin:10px">Nuevo Articulo</h3>
   <form style="width: 50% margin=15px" name="formul">
-      <div class="form-group">
-        <label>Codigo</label>
-        <input type="number" class="form-control" name='algo' [(ngModel)]="art.codigo" placeholder="Codigo">
-      </div>
-
-      <div class="form-group">
+    <form>
+      <div class="row">
+        <div class="col">
+          <label>Codigo</label>
+          <input type="number" class="form-control" name='algo' [(ngModel)]="art.codigo" placeholder="Codigo">
+        </div>
+        <div class="col">
           <label>Nombre</label>
           <input type="text" class="form-control" name='name' [(ngModel)]="art.nombre" placeholder="Nombre">
+        </div>
+        <div class="col">
+            <label>Descripcion</label>
+            <input type="text" class="form-control" name='algo2' [(ngModel)]="art.descripcion" placeholder="Descripcion">
+        </div>
       </div>
-
-      <div class="form-group">
-          <label>Descripcion</label>
-          <input type="text" class="form-control" name='algo2' [(ngModel)]="art.descripcion" placeholder="Descripcion">
-      </div>
-  <div class="form-group">
-      <div class="form-group">
+      <br>
+      <div class="row">
+        <div class="col">
           <label>Precio de Compra</label>
           <input type="number" class="form-control" name='pcompra' [(ngModel)]="art.precio_compra">
+        </div>
+        <div class="col">
+          <label>Precio de Venta</label>
+          <input type="number" class="form-control" name='pventa' [(ngModel)]="art.precio_venta">
+        </div>
+        <div class="col">
+          <label>%IVA</label>
+          <select class="form-control" name="iva" [(ngModel)]="art.iva">
+            <option type="number" value="0.21" >21</option>
+            <option type="number" value="0.105" >10.5</option>
+          </select>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label>Precio de Venta</label>
-        <input type="number" class="form-control" name='pventa' [(ngModel)]="art.precio_venta">
-      </div>
-    </div>
-      <div class="form-group">
-        <label>%IVA</label>
-        <select class="form-control" name="iva" [(ngModel)]="art.iva">
-          <option type="number" value="0.21" >21</option>
-          <option type="number" value="0.105" >10.5</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="exampleFormControlSelect1" >Rubro</label>
-        <select class="form-control" name="rub"  id="rubroSeleccionado">
-          <option *ngFor="let r of rubros" value="{{r.id}}">{{r.nombre}}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
+      <br>
+      <div class="row">
+        <div class="col">
+          <label for="exampleFormControlSelect1" >Rubro</label>
+          <select class="form-control" name="rub"  id="rubroSeleccionado">
+            <option *ngFor="let r of rubros" value="{{r.id}}">{{r.nombre}}</option>
+          </select>
+        </div>
+        <div class="col">
           <label for="exampleFormControlSelect1">Proveedor</label>
           <select class="custom-select" name="pr" id="proveedorSeleccionado">
             <option *ngFor="let p of proveedores" value="{{p.id}}">{{p.nombre}}</option>
           </select>
+        </div>
       </div>
-
-      <div class="form-group">
-        <button class="btn btn-success" (click)="guardar()">Ok</button>
-        <button class="btn btn-danger" [routerLink]="'/listaarticulos'">Cancelar</button>
+    </form>
+    <div style="margin:15px" class="form-group">
+        <button style="margin:5px" class="btn btn-success" (click)="guardar()">OK <img src="https://img.icons8.com/ios/28/000000/checkmark.png"></button>
+        <button style="margin:5px" class="btn btn-default" [routerLink]="'/listaarticulos'">Cancelar <img src="https://img.icons8.com/ios-glyphs/29/000000/delete-sign.png"></button>
       </div>
   </form>
 </div>
+

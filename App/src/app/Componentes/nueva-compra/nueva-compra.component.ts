@@ -22,7 +22,7 @@ export class NuevaCompraComponent implements OnInit {
   //(id_factura: number, id_articulo: number, cantidad: number, precio_compra: number, precio_venta: number)
   articulosFactura:FacturaItem[]=[];
   articulosSinAgregar:Articulo[]=[];
-  factura:Factura= new Factura(new Date(),1,1,'A',0,0,0);
+  factura:Factura= new Factura(new Date(),1,1,'A',0,null,0);
   cantidad:number=1;
   acumuladorIva21:number=0;
   acumuladorIva105:number=0;
@@ -124,7 +124,24 @@ export class NuevaCompraComponent implements OnInit {
     })
     
   }
+  quitarItem(item:FacturaItem){
+    let arrayAuxiliar:FacturaItem[]=[];
+    for(var i=0;i<this.articulosFactura.length;i++){
+      if(this.articulosFactura[i].id_articulo!=item.id_articulo){
+        arrayAuxiliar.push(this.articulosFactura[i]);
+      }
+    }
 
+    if(item.iva==0.21){
+      this.acumuladorIva21-=item.subtotal*item.iva;
+    }
+    else{
+      this.acumuladorIva105-=item.subtotal*item.iva;
+    }
+    this.acumuladorTotal-=item.subtotal;
+    this.articulosFactura=arrayAuxiliar;
+    this.actualizarListaSinAgregar();
+  }
   //Chequeo que el articulo que voy a agregar a la lista de articulos para agregar a la factura no este ya en la misma
   checkearItemFactura(ar:Articulo){
     if(this.articulosFactura!=[]){

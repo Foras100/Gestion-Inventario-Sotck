@@ -1,3 +1,21 @@
-<p>
-  lista-rubros works!
-</p>
+<div style="margin:10px">
+  <h3 style="margin:10px">Rubros</h3>
+  <table class="table table-info">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Ubicacion</th>
+        <th scope="col"><button class="btn btn-info" [routerLink]="'/nuevorubro'">NUEVO</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of servicioRubro.rubros | async ">
+        <th scope="row">{{r.nombre}}</th>
+        <td>{{r.descripcion}}</td>
+        <td>{{r.ubicacion}}</td>
+        <td><button class="btn btn-success" [routerLink]="'/inforubro/'+r.id"><img src="https://img.icons8.com/windows/25/000000/info.png"><img src="https://img.icons8.com/ios-glyphs/25/000000/pencil.png"></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

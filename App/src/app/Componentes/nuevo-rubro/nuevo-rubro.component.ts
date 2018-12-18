@@ -25,12 +25,12 @@ export class NuevoRubroComponent implements OnInit {
       }
       if(coincide){
         alert("Ya existe el rubro '"+this.rubro.nombre+"'");
+        coincide=false;
       }
       else{
         this.servicioRubro.guardarRubro(this.rubro).subscribe(()=>this.router.navigate(["/listarubros"]));
       }
     })
-
   }
     
   ngOnInit() {

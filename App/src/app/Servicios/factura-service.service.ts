@@ -70,4 +70,7 @@ export class FacturaServiceService {
       this.http.post(this.host+"factura_item_venta",items[i]).subscribe();
     }
   }
+  borrarFactura(id:number){
+    return this.http.delete(this.host+"factura/"+id);
+  }
 }
