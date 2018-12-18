@@ -10,4 +10,7 @@ Para generar una factura de compra primero se deben tener cargados al menos un r
 
 Para generar una de venta se necesitan precargados un cliente y que algun articulo tenga stock myor a 0.
 
-Tanto las carpetas Server como App solo tienen los archivos propios del sistema, se deben genrar los respectivosarchivos de soporte para Angular y Express.
+Tanto las carpetas Server como App solo tienen los archivos propios del sistema, se deben genrar los respectivos archivos de soporte para ambos.
+
+Para el servidor las dependencias necesarias son => "npm install -s express sequelize nodemon pg pg-hstore multer body-parser".
+Para la app agregamos bootstrap jquery y popper => "npm install -s bootstrap jquery popper.js --save-prod".
