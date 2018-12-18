@@ -30,6 +30,16 @@ export class NuevaVentaComponent implements OnInit {
               private servicioFactura:FacturaServiceService,
               private router:Router) {
     this.getNroCorrelativo();
+    this.todosArticulos();
+  }
+  todosArticulos(){
+    this.servicioArticulo.articulos.subscribe(ar=>{
+      for(var i=0;i<ar.length;i++){
+        if(ar[i].stock>0)
+          this.articulosSinAgregar.push(ar[i])
+      }
+      this.cantidad=1;
+    })
   }
   quitarItem(item:FacturaItem){
     let arrayAuxiliar:FacturaItem[]=[];
@@ -158,8 +168,9 @@ export class NuevaVentaComponent implements OnInit {
           // console.log(this.factura);
           // console.log(this.articulosFactura);
           this.servicioFactura.guardarFactura(this.factura).subscribe(f=>{
-            this.servicioFactura.guardarItemsVenta(this.articulosFactura,(<Factura>f).id)
-          this.router.navigate(["/listaventas"]);
+            this.servicioFactura.guardarItemsVenta(this.articulosFactura,(<Factura>f).id);
+            this.servicioFactura.setFacturas();
+            this.router.navigate(["/listaventas"]);
           })
         }
   }

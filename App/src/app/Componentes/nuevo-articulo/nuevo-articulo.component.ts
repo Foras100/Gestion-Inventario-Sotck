@@ -35,14 +35,20 @@ export class NuevoArticuloComponent implements OnInit {
     else if(this.servicioarticulo.checkCodigo(this.art.codigo)){
       alert("El codigo pertenece a otro articulo")
     }
-    else {
+    else if(this.art.precio_compra>=this.art.precio_venta){
+      alert("EL precio de venta debe ser mayor o igual al precio de compra")
+    }
+    else{
       this.art.id_proveedor=parseInt((<HTMLInputElement>document.getElementById('proveedorSeleccionado')).value);
       this.art.id_rubro=parseInt((<HTMLInputElement>document.getElementById('rubroSeleccionado')).value);
       this.art.iva=parseFloat(this.art.iva.toString())
       console.log(this.art);
 
-      this.servicioarticulo.guardarArticulo(this.art);
-      this.router.navigate(['/listaarticulos'])
+      this.servicioarticulo.guardarArticulo(this.art).subscribe(()=>{
+        this.servicioarticulo.setArticulos();
+        this.router.navigate(['/listaarticulos']);
+      });
+      
     }
   }
 

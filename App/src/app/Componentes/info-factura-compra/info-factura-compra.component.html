@@ -39,7 +39,7 @@
                         <td>$ {{item.precio_compra | number:'1.2-2'}}</td>
                         <td>{{item.iva*100}}%</td>
                         <td>$ {{item.subtotal | number:'1.2-2'}}</td>
-                        <td><button [routerLink]="'/infoarticulo/'+item.id_articulo">INFO</button></td>
+                        <td><button [routerLink]="'/infoarticulo/'+item.id_articulo"><img src="https://img.icons8.com/windows/25/000000/info.png"></button></td>
                       </tr>
                       <tr>
                         <th scope="col">Total SIN IVA: </th>
@@ -86,6 +86,7 @@
                           <td>$ {{item.precio_compra | number:'1.2-2'}}</td>
                           <td>{{item.iva*100}}%</td>
                           <td>$ {{item.subtotal+(item.iva*item.subtotal) | number:'1.2-2'}}</td>
+                          <td><button [routerLink]="'/infoarticulo/'+item.id_articulo"><img src="https://img.icons8.com/windows/25/000000/info.png"></button></td>
                         </tr>
                         <tr>
                           <th scope="col">Total: </th>

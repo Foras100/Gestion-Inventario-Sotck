@@ -22,11 +22,10 @@ export class NuevoProveedorComponent implements OnInit {
       alert("Cuit ya registrado como proveedor!");
     }
     else{
-      console.log(this.proveedor);
-      // this.servicioProveedor.guardarProveedor(this.proveedor).subscribe((p)=>{
-      //   this.servicioProveedor.setProveedores();
-      //   this.router.navigate(['/listaproveedores']);
-      // });
+       this.servicioProveedor.guardarProveedor(this.proveedor).subscribe((p)=>{
+         this.servicioProveedor.setProveedores();
+         this.router.navigate(['/listaproveedores']);
+       });
     }
   }
   ngOnInit() {

@@ -24,8 +24,10 @@ export class NuevoClienteComponent implements OnInit {
       alert("Cliente ya registrado");
     }
     else{
-      //alert("se puede crear el cliente");
-      this.servicioCliente.guardarCliente(this.cliente).subscribe(()=>this.router.navigate(['/listaclientes']));
+      this.servicioCliente.guardarCliente(this.cliente).subscribe(()=>{
+        this.servicioCliente.setClientes();
+        this.router.navigate(['/listaclientes']);
+      });
     }
   }
   ngOnInit() {

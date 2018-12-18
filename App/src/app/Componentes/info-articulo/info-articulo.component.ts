@@ -48,7 +48,10 @@ export class InfoArticuloComponent implements OnInit {
       this.articulo.id_proveedor=parseInt((<HTMLInputElement>document.getElementById('select_proveedor')).value);
       this.articulo.id_rubro=parseInt((<HTMLInputElement>document.getElementById('select_rubro')).value);
       
-      this.servicioArticulo.updateArticulo(this.articulo).subscribe(p=>this.router.navigate(['/listaarticulos']));
+      this.servicioArticulo.updateArticulo(this.articulo).subscribe(p=>{
+        this.servicioArticulo.setArticulos();
+        this.router.navigate(['/listaarticulos'])
+      });
 
     }
   }

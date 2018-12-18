@@ -50,7 +50,7 @@ export class NuevaCompraComponent implements OnInit {
                                   //this.articulosSinAgregar[i].iva,
                                   parseFloat(this.articulosSinAgregar[i].iva.toString()),
                                   (this.articulosSinAgregar[i].precio_compra*this.cantidad));//Subtotal
-          console.log(it);
+          //console.log(it);
           this.articulosFactura.push(it);
           this.acumuladorTotal+=it.subtotal;
           if(it.iva==0.21){
@@ -81,7 +81,7 @@ export class NuevaCompraComponent implements OnInit {
     if(id_rubro==0){
       this.servicioArticulo.articulos.subscribe(ar=>{
         for(var i=0;i<ar.length;i++){
-          if(!this.checkearItemFactura(ar[i])&& ar[i].stock>0 && ar[i].id_proveedor==id_proveedor)
+          if(!this.checkearItemFactura(ar[i]) && ar[i].id_proveedor==id_proveedor)
             this.articulosSinAgregar.push(ar[i])
         }
         this.cantidad=1;
@@ -90,7 +90,7 @@ export class NuevaCompraComponent implements OnInit {
     else{
       this.servicioArticulo.articulos.subscribe(ar=>{
         for(var i=0;i<ar.length;i++){
-          if(ar[i].id_rubro==id_rubro && !this.checkearItemFactura(ar[i]) && ar[i].stock>0 && ar[i].id_proveedor==id_proveedor)
+          if(ar[i].id_rubro==id_rubro && !this.checkearItemFactura(ar[i]) && ar[i].id_proveedor==id_proveedor)
             this.articulosSinAgregar.push(ar[i])
         }
         this.cantidad=1;
@@ -114,14 +114,14 @@ export class NuevaCompraComponent implements OnInit {
     this.articulosFactura=[]
     this.articulosSinAgregar=[];
     var id_proveedor:number=parseInt((<HTMLInputElement>document.getElementById('select_proveedor')).value);
-
-    this.servicioArticulo.articulos.subscribe(ar=>{
-      for(var i=0;i<ar.length;i++){
-        if(ar[i].id_proveedor==id_proveedor && !this.checkearItemFactura(ar[i])){
-          this.articulosSinAgregar.push(ar[i])
-        }
-      }
-    })
+    this.actualizarListaSinAgregar();
+    //this.servicioArticulo.articulos.subscribe(ar=>{
+    //  for(var i=0;i<ar.length;i++){
+    //    if(ar[i].id_proveedor==id_proveedor && !this.checkearItemFactura(ar[i])){
+    //      this.articulosSinAgregar.push(ar[i])
+    //    }
+    //  }
+    //})
     
   }
   quitarItem(item:FacturaItem){
@@ -180,6 +180,7 @@ export class NuevaCompraComponent implements OnInit {
         
         this.servicioFactura.guardarFactura(this.factura).subscribe(f=>{
           this.servicioFactura.guardarItemsCompra(this.articulosFactura,(<Factura>f).id);
+          this.servicioFactura.setFacturas();
           this.router.navigate(['/listacompras'])
         })
       }

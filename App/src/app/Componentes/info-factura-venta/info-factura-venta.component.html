@@ -11,7 +11,8 @@
               <h5>Tipo Factura: "{{factura.tipo}}"</h5><br>
               <h5>Cliete: {{cliente.nombre}}</h5><br>
               <div style="margin-left:10px" class="form-group">
-                <button class="btn btn-success" style="margin:5px" [routerLink]="'/listaventas'">Volver a la Lista de Facturas de Venta</button>
+                <button style="margin:5px" class="btn btn-success" [routerLink]="'/listaventas'">OK <img src="https://img.icons8.com/ios/28/000000/checkmark.png"></button>
+                <button style="margin:5px" class="btn btn-danger" (click)="borrar()">Borrar <img src="https://img.icons8.com/windows/28/000000/delete.png"></button>
               </div>
           </div>
   
@@ -38,7 +39,7 @@
                           <td>$ {{item.precio_venta | number:'1.2-2'}}</td>
                           <td>{{item.iva*100}}%</td>
                           <td>$ {{item.subtotal | number:'1.2-2'}}</td>
-                          <td><button [routerLink]="'/infoarticulo/'+item.id_articulo">INFO</button></td>
+                          <td><button [routerLink]="'/infoarticulo/'+item.id_articulo"><img src="https://img.icons8.com/windows/25/000000/info.png"></button></td>
                         </tr>
                         <tr>
                           <th scope="col">Total SIN IVA: </th>

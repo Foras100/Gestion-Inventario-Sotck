@@ -23,7 +23,7 @@ export class ArticuloServiceService {
   }
 
   guardarArticulo(art:Articulo){
-    this.http.post(this.host+"articulo",art).subscribe(()=>this.setArticulos());
+    return this.http.post(this.host+"articulo",art);
   }
   borrarArticulo(id:number){
     return this.http.delete(this.host+"articulo/"+id);

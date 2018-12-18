@@ -38,7 +38,12 @@ export class InfoFacturaVentaComponent implements OnInit {
         });
       })
   }
-  
+  borrar(){
+    this.servicioFactura.borrarFactura(this.factura.id).subscribe(()=>{
+      this.servicioFactura.setFacturas();
+      this.router.navigate(["/listaventas"]);
+    });
+  }
   actualizarAcumuladores(){
     for(var i=0;i<this.articulosFactura.length;i++){
       if(this.articulosFactura[i].iva==0.21){

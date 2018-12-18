@@ -28,7 +28,10 @@ export class NuevoRubroComponent implements OnInit {
         coincide=false;
       }
       else{
-        this.servicioRubro.guardarRubro(this.rubro).subscribe(()=>this.router.navigate(["/listarubros"]));
+        this.servicioRubro.guardarRubro(this.rubro).subscribe(()=>{
+          this.servicioRubro.setRubros();
+          this.router.navigate(["/listarubros"]);
+        });
       }
     })
   }
