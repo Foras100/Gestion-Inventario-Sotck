@@ -1,4 +1,4 @@
-# Gestion-Inventario-Sotck
+# Gestion-Inventario-Stock
 Applicacion creada con angular 6 contra servidor REST express y Postgresql para la asignatura Laboratorio 4 de la Tecnicatura Superior en Programacion de la UTN-FRP.
 
 
